@@ -2,6 +2,8 @@
  *  Copyright 2018 - 2019 Mitsuha Kitsune <https://mitsuhakitsune.com>
  *  Licensed under the MIT license.
  */
+/* eslint no-console: "warn" */
+/* eslint-disable */
 
 import BackgroundScript from './backgroundScript';
 import Browser from './browser';
@@ -40,9 +42,14 @@ export default function(opt) {
     str.registerModule('@@VWE_Helper', {
       mutations: {
         vweReplaceState(state, payload) {
-          Object.keys(str.state).forEach(function(key) {
-            str.state[key] = payload[key];
-          });
+          console.log('[VWE_Helper] payload:', payload);
+          console.log('Before:', str.state);
+          Object.keys(str.state)
+            .filter((key) => key != 'plyShared')
+            .forEach(function(key) {
+              str.state[key] = payload[key];
+            });
+          console.log('After:', str.state);
         }
       }
     });

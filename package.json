@@ -7,17 +7,13 @@
     "dist"
   ],
   "scripts": {
-    "build": "rimraf dist && rollup -c",
+    "build": "rimraf dist && babel src -d dist",
     "lint": "eslint src",
     "precommit": "npm run lint && pretty-quick --staged",
     "prepare": "npm run lint && npm run test && npm run build",
     "prettier": "prettier **/*.{js,json,css,vue}",
     "prettier:write": "npm run prettier -- --write",
     "test": "echo \"Tests aren't ready for now\" && exit 0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MitsuhaKitsune/vuex-webextensions.git"
   },
   "keywords": [
     "vuex",
@@ -32,7 +28,6 @@
   "bugs": {
     "url": "https://github.com/MitsuhaKitsune/vuex-webextensions/issues"
   },
-  "homepage": "https://github.com/MitsuhaKitsune/vuex-webextensions#readme",
   "devDependencies": {
     "@babel/cli": "^7.7.5",
     "@babel/core": "^7.7.5",
