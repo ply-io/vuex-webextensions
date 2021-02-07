@@ -16,7 +16,8 @@ var defaultOptions = {
   persistentStates: [],
   ignoredMutations: [],
   ignoredActions: [],
-  syncActions: true
+  syncActions: true,
+  ignoredStates: []
 };
 
 export default function(opt) {
@@ -37,19 +38,24 @@ export default function(opt) {
   // Initialize browser class
   const browser = new Browser();
 
+  const isIgnoredState = (state) => {
+    const isIgnored = options.ignoredStates.includes(state);
+    console.log(`Checking if ${state} is ignored:`, isIgnored);
+    return isIgnored;
+  };
+
   return function(str) {
     // Inject the custom mutation to replace the state on load
     str.registerModule('@@VWE_Helper', {
       mutations: {
         vweReplaceState(state, payload) {
-          console.log('[VWE_Helper] payload:', payload);
-          console.log('Before:', str.state);
           Object.keys(str.state)
-            .filter((key) => key != 'plyShared')
+            .filter((key) => {
+              return isIgnoredState(key) === false;
+            })
             .forEach(function(key) {
               str.state[key] = payload[key];
             });
-          console.log('After:', str.state);
         }
       }
     });
