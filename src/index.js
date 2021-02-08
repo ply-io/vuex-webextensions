@@ -40,7 +40,7 @@ export default function(opt) {
 
   const isIgnoredState = (state) => {
     const isIgnored = options.ignoredStates.includes(state);
-    console.log(`Checking if ${state} is ignored:`, isIgnored);
+    Logger.debug(`Checking if ${state} is ignored:`, isIgnored);
     return isIgnored;
   };
 
