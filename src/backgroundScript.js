@@ -51,6 +51,17 @@ class BackgroundScript {
         return;
       }
 
+      // If it's mutation from an ignored state - log and halt.
+      if (this.settings.ignoredStates.length > 0) {
+        const isPartOfIgnored = this.settings.ignoredStates.some((statePrefix) => mutation.type.includes(statePrefix));
+
+        if (isPartOfIgnored) {
+          Logger.info(`Mutation (${mutation.type}) is on ignored states list, skiping... found: ${isPartOfIgnored}`);
+
+          return;
+        }
+      }
+
       // Send mutation to connections pool
       for (var i = this.connections.length - 1; i >= 0; i--) {
         // If received mutations list of connection is empty isn't his mutation, send it
