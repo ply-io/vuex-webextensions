@@ -1,6 +1,6 @@
 {
   "name": "@ply-io/vuex-webextensions",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Use Vuex on WebExtensions on 'shared' context - Ply FORK",
   "main": "dist/index.js",
   "files": [
